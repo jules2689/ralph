@@ -42,6 +42,7 @@ PRD_FILE="$SCRIPT_DIR/prd.json"
 PROGRESS_FILE="$SCRIPT_DIR/progress.txt"
 ARCHIVE_DIR="$SCRIPT_DIR/archive"
 LAST_BRANCH_FILE="$SCRIPT_DIR/.last-branch"
+CURSOR_PROMPT_FILE="$SCRIPT_DIR/cursor-prompt.md"
 
 COMMIT_PROMPT_EXISTS=false
 if [ -f "$SCRIPT_DIR/COMMIT_PROMPT.md" ]; then
@@ -56,11 +57,11 @@ function commit_changes() {
   if [ "$COMMIT_PROMPT_EXISTS" = true ]; then
     echo "Committing changes via prompt..."
     if [[ "$TOOL" == "amp" ]]; then
-      cat "$SCRIPT_DIR/COMMIT_PROMPT.md" | amp --dangerously-allow-all 2>&1 | tee /dev/stderr
+      cat "$CURSOR_PROMPT_FILE" | amp --dangerously-allow-all 2>&1 | tee /dev/stderr
     elif [[ "$TOOL" == "claude" ]]; then
-      cat "$SCRIPT_DIR/COMMIT_PROMPT.md" | claude --dangerously-skip-permissions --print 2>&1 | tee /dev/stderr
+      cat "$CURSOR_PROMPT_FILE" | claude --dangerously-skip-permissions --print 2>&1 | tee /dev/stderr
     else
-      cat "$SCRIPT_DIR/COMMIT_PROMPT.md" | agent -p --force 2>&1 | tee /dev/stderr
+      cat "$CURSOR_PROMPT_FILE" | agent -p --force 2>&1 | tee /dev/stderr
     fi
   else
     echo "Committing changes manually..."
