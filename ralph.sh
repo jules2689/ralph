@@ -136,7 +136,7 @@ for i in $(seq 1 $MAX_ITERATIONS); do
     echo ""
     echo "Ralph completed all tasks!"
     echo "Completed at iteration $i of $MAX_ITERATIONS"
-    commit_changes()
+    commit_changes
     exit 0
   fi
   
@@ -147,5 +147,5 @@ done
 echo ""
 echo "Ralph reached max iterations ($MAX_ITERATIONS) without completing all tasks."
 echo "Check $PROGRESS_FILE for status."
-commit_changes()
+commit_changes
 exit 1
