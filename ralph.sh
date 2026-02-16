@@ -44,7 +44,7 @@ ARCHIVE_DIR="$SCRIPT_DIR/archive"
 LAST_BRANCH_FILE="$SCRIPT_DIR/.last-branch"
 
 COMMIT_PROMPT_EXISTS=false
-if [ -f "$SCRIPT_DIR/commit.md" ]; then
+if [ -f "$SCRIPT_DIR/COMMIT_PROMPT.md" ]; then
   COMMIT_PROMPT_EXISTS=true
 fi
 
