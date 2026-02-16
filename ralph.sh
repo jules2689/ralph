@@ -131,13 +131,14 @@ for i in $(seq 1 $MAX_ITERATIONS); do
     PROMPT=$(cat "$SCRIPT_DIR/prompt.md")
     OUTPUT=$(agent -p --force "$PROMPT" 2>&1 | tee /dev/stderr) || true
   fi
+
+  commit_changes
   
   # Check for completion signal
   if echo "$OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
     echo ""
     echo "Ralph completed all tasks!"
     echo "Completed at iteration $i of $MAX_ITERATIONS"
-    commit_changes
     exit 0
   fi
   
@@ -148,5 +149,4 @@ done
 echo ""
 echo "Ralph reached max iterations ($MAX_ITERATIONS) without completing all tasks."
 echo "Check $PROGRESS_FILE for status."
-commit_changes
 exit 1
